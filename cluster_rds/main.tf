@@ -59,6 +59,7 @@ resource "aws_db_instance" "rds-mssql" {
   identifier     = "mydb"
   username       = "dbuser"
   password       = "dbpassword"
+  db_name        = "fastfoodfiap"
 
   allocated_storage     = 20
   storage_type = "gp2" 
