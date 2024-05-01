@@ -13,8 +13,8 @@ resource "aws_ecr_repository" "ecr_products" {
   tags = var.tags
 }
 
-resource "aws_ecr_repository" "ecr_user" {
-  name = var.ecr_user_name
+resource "aws_ecr_repository" "ecr_auth" {
+  name = var.ecr_auth
 
   image_tag_mutability = var.image_mutability
 
@@ -29,6 +29,6 @@ resource "aws_ecr_repository" "ecr_user" {
   tags = var.tags
 }
 
-output "ecr_user_repository_url" {
-  value = aws_ecr_repository.ecr_user.repository_url
+output "ecr_auth_repository_url" {
+  value = aws_ecr_repository.ecr_auth.repository_url
 }

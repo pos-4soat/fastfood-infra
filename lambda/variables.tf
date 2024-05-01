@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "log_group_name" {
-  default = "/FastFoodUserManagement/Logging"
+  default = "/FastFood/Logging"
   type    = string
 }
 
@@ -30,4 +30,4 @@ variable "dynamodb_table_name" {}
 variable "cognito_user_pool_id" {}
 variable "cognito_user_pool_client_id" {}
 variable "lambda_role" {}
-variable "ecr_user_repository_url" {}
+variable "ecr_auth_repository_url" {}

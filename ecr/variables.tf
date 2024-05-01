@@ -1,13 +1,13 @@
 variable "ecr_products" {
   description = "The name of the ECR registry"
   type        = any
-  default     = "ecr-fast_food_products"
+  default     = "ecr-fastfood_products"
 }
 
-variable "ecr_user_name" {
+variable "ecr_auth" {
   description = "The name of the ECR registry"
   type        = any
-  default     = "ecr-fast_food_user_management"
+  default     = "ecr-fastfood_auth"
 }
 
 variable "image_mutability" {

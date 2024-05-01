@@ -1,4 +1,4 @@
-resource "aws_lambda_function" "fast_food_user_management" {
+resource "aws_lambda_function" "fastfood_auth" {
   environment {
     variables = {
       AWS_ACCESS_KEY_DYNAMO = var.access_key_id
@@ -16,15 +16,15 @@ resource "aws_lambda_function" "fast_food_user_management" {
   memory_size   = "128"
   timeout       = 60
   architectures = ["x86_64"]
-  function_name = "FastFoodUserManagement"
-  image_uri     = "${var.ecr_user_repository_url}:latest"
+  function_name = "fastfood_auth"
+  image_uri     = "${var.ecr_auth_repository_url}:latest"
   role          = var.lambda_role
 }
 
 output "lambda_arn" {
-  value = aws_lambda_function.fast_food_user_management.invoke_arn
+  value = aws_lambda_function.fastfood_auth.invoke_arn
 }
 
 output "lambda_name" {
-  value = aws_lambda_function.fast_food_user_management.function_name
+  value = aws_lambda_function.fastfood_auth.function_name
 }

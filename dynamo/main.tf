@@ -1,4 +1,4 @@
-resource "aws_dynamodb_table" "FastFoodUserManagement" {
+resource "aws_dynamodb_table" "FastFoodUser" {
   name           = var.dynamo_table_name
   billing_mode   = var.billing_mode
   read_capacity  = var.read_capacity
@@ -18,5 +18,5 @@ resource "aws_dynamodb_table" "FastFoodUserManagement" {
 }
 
 output "dynamodb_table_name" {
-  value = aws_dynamodb_table.FastFoodUserManagement.name
+  value = aws_dynamodb_table.FastFoodUser.name
 }
