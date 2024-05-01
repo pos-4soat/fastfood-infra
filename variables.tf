@@ -5,10 +5,10 @@ variable "region" {
 
 variable "create_lambda" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "integration_uri_lb" {
   type    = string
-  default = "http://a3670aa530ba74770ac0a7eaefa7eb95-689856310.us-east-1.elb.amazonaws.com"
+  default = "http://a1f39ea83f95441a3893d731ea49d7ad-1681536253.us-east-1.elb.amazonaws.com"
 }
