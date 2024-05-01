@@ -1,5 +1,5 @@
 variable "dynamo_table_name" {
-  default = "FastFoodUserManagement"
+  default = "FastFoodUser"
   type    = string
 }
 
