@@ -8,8 +8,6 @@ data "aws_availability_zones" "available" {
 resource "aws_security_group" "rds_sg" {
   name_prefix = "rds-"
 
-  vpc_id = module.vpc.vpc_id
-
   ingress {
     from_port   = 1433
     to_port     = 1433
