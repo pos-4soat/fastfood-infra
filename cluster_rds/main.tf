@@ -29,6 +29,12 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = "1.29"
 
+  vpc_id                         = module.vpc.vpc_id
+  subnet_ids                     = module.vpc.private_subnets
+  
+  cluster_endpoint_private_access = true
+  cluster_endpoint_public_access  = true
+
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
   }
@@ -59,7 +65,15 @@ resource "aws_db_instance" "rds-mssql" {
 
   port = 1433
 
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  db_subnet_group_name   = aws_db_subnet_group.rds_db_subnet_group.name
+
   skip_final_snapshot = true
   publicly_accessible = true
   multi_az            = false
+}
+
+resource "aws_db_subnet_group" "rds_db_subnet_group" {
+  name       = "rds-db-subnet-group"
+  subnet_ids = module.vpc.private_subnets
 }

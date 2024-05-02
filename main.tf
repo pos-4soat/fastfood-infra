@@ -57,3 +57,16 @@ module "lambda" {
   lambda_role                 = module.authentication_lambda_access_key[0].lambda_role
   ecr_auth_repository_url     = module.ecr.ecr_auth_repository_url
 }
+
+module "api_gateway" {
+  count  = var.create_lambda ? 1 : 0
+  source = "./api_gateway"
+
+  cognito_user_pool_id        = module.cognito.cognito_user_pool_id
+  cognito_user_pool_client_id = module.cognito.cognito_user_pool_client_id
+  lambda_arn                  = module.lambda[0].lambda_arn
+  lambda_name                 = module.lambda[0].lambda_name
+  private_subnets_ids         = module.cluster_rds.private_subnets_ids
+  security_group_id           = module.cluster_rds.security_group_id
+  integration_uri_lb          = var.integration_uri_lb
+}
