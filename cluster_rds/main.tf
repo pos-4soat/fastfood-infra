@@ -29,12 +29,6 @@ module "eks" {
   cluster_name    = var.cluster_name
   cluster_version = "1.29"
 
-  vpc_id                         = module.vpc.vpc_id
-  subnet_ids                     = module.vpc.private_subnets
-  
-  cluster_endpoint_private_access = true
-  cluster_endpoint_public_access  = true
-
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
   }
@@ -65,15 +59,63 @@ resource "aws_db_instance" "rds-mssql" {
 
   port = 1433
 
-  vpc_security_group_ids = [aws_security_group.rds_sg.id]
-  db_subnet_group_name   = aws_db_subnet_group.rds_db_subnet_group.name
-
   skip_final_snapshot = true
   publicly_accessible = true
   multi_az            = false
 }
 
-resource "aws_db_subnet_group" "rds_db_subnet_group" {
-  name       = "rds-db-subnet-group"
-  subnet_ids = module.vpc.private_subnets
+resource "aws_security_group" "rds_sg" {
+  name_prefix = "rds-"
+
+  vpc_id = module.vpc.vpc_id
+
+  ingress {
+    from_port   = 1433
+    to_port     = 1433
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow inbound traffic from any IP address.
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = ["45.185.168.173/32"]
+  }
+
+    egress {
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group_rule" "allow_eks_nodes_to_rds" {
+  for_each = toset(local.flattened_security_groups)
+
+  type              = "ingress"
+  from_port         = 1433
+  to_port           = 1433
+  protocol          = "tcp"
+  security_group_id = aws_security_group.rds_sg.id
+  source_security_group_id = each.value
+}
+
+resource "aws_security_group_rule" "allow_eks_nodes" {
+  for_each = toset(local.flattened_security_groups)
+
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.rds_sg.id
+  source_security_group_id = each.value
 }
