@@ -13,9 +13,8 @@ resource "aws_ecr_repository" "ecr_products" {
   tags = var.tags
 }
 
-resource "aws_ecr_repository" "ecr_auth" {
-  name = var.ecr_auth
-
+resource "aws_ecr_repository" "ecr_orders" {
+  name                 = var.ecr_orders
   image_tag_mutability = var.image_mutability
 
   encryption_configuration {
@@ -29,7 +28,37 @@ resource "aws_ecr_repository" "ecr_auth" {
   tags = var.tags
 }
 
-resource "aws_ecr_repository" "ecr_order" {
+resource "aws_ecr_repository" "ecr_payment" {
+  name                 = var.ecr_payment
+  image_tag_mutability = var.image_mutability
+
+  encryption_configuration {
+    encryption_type = var.encrypt_type
+  }
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = var.tags
+}
+
+resource "aws_ecr_repository" "ecr_production" {
+  name                 = var.ecr_production
+  image_tag_mutability = var.image_mutability
+
+  encryption_configuration {
+    encryption_type = var.encrypt_type
+  }
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = var.tags
+}
+
+resource "aws_ecr_repository" "ecr_auth" {
   name = var.ecr_auth
 
   image_tag_mutability = var.image_mutability

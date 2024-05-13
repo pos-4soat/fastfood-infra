@@ -4,6 +4,24 @@ variable "ecr_products" {
   default     = "ecr-fastfood_products"
 }
 
+variable "ecr_orders" {
+  description = "The name of the ECR registry"
+  type        = any
+  default     = "ecr-fastfood_orders"
+}
+
+variable "ecr_payment" {
+  description = "The name of the ECR registry"
+  type        = any
+  default     = "ecr-fastfood_payment"
+}
+
+variable "ecr_production" {
+  description = "The name of the ECR registry"
+  type        = any
+  default     = "ecr-fastfood_production"
+}
+
 variable "ecr_auth" {
   description = "The name of the ECR registry"
   type        = any
