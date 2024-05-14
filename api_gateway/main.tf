@@ -59,6 +59,15 @@ resource "aws_apigatewayv2_route" "load_balancer_route_product_" {
   authorization_type = "JWT"
 }
 
+##################################### ROUTES LAMBDA
+
+resource "aws_apigatewayv2_route" "lambda_route" {
+  depends_on = [aws_apigatewayv2_api.ApiGateway, aws_apigatewayv2_integration.lambda_integration]
+  api_id     = aws_apigatewayv2_api.ApiGateway.id
+  route_key  = "ANY /User/{proxy+}"
+  target     = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+}
+
 ##################################### STAGE
 
 resource "aws_apigatewayv2_stage" "ApiGatewayStage" {
