@@ -38,7 +38,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   payload_format_version = "2.0"
 }
 
-##################################### INTEGRATION ORDER
+##################################### INTEGRATION PRODUCT
 
 resource "aws_apigatewayv2_integration" "load_balancer_integration_product" {
   api_id             = aws_apigatewayv2_api.ApiGateway.id
@@ -48,7 +48,7 @@ resource "aws_apigatewayv2_integration" "load_balancer_integration_product" {
   integration_method = "ANY"
 }
 
-##################################### ROUTES ORDER
+##################################### ROUTES PRODUCT
 
 resource "aws_apigatewayv2_route" "load_balancer_route_product_" {
   depends_on         = [aws_apigatewayv2_integration.load_balancer_integration_product]
