@@ -68,5 +68,8 @@ module "api_gateway" {
   lambda_name                 = module.lambda[0].lambda_name
   private_subnets_ids         = module.cluster_rds.private_subnets_ids
   security_group_id           = module.cluster_rds.security_group_id
-  integration_uri_lb          = var.integration_uri_lb
+  products_uri_lb             = var.products_uri_lb
+  order_uri_lb                = var.order_uri_lb
+  payment_uri_lb              = var.payment_uri_lb
+  production_uri_lb           = var.production_uri_lb
 }
