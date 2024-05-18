@@ -37,7 +37,3 @@ ATENÇÃO:
 * products_uri_lb com valor do DNS Name do load balancer de produtos
 * order_uri_lb com valor do DNS Name do load balancer de pedidos
 * payment_uri_lb com valor do DNS Name do load balancer de pagamento
-
-## Diagrama dos recursos
-
-![Diagrama](graph.png)
