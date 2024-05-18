@@ -25,4 +25,7 @@ variable "cognito_user_pool_id" {}
 variable "lambda_name" {}
 variable "private_subnets_ids" {}
 variable "security_group_id" {}
-variable "integration_uri_lb" {}
+variable "products_uri_lb" {}
+variable "order_uri_lb" {}
+variable "payment_uri_lb" {}
+variable "production_uri_lb" {}
