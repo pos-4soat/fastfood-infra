@@ -5,25 +5,25 @@ variable "region" {
 
 variable "create_lambda" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "products_uri_lb" {
   type    = string
-  default = "http://aaf158365ac594b9a935a5728cff86a4-477550370.us-east-1.elb.amazonaws.com"
+  default = "http://aa805ca87a7a84245ad5553a688cb953-352154593.us-east-1.elb.amazonaws.com"
 }
 
 variable "order_uri_lb" {
   type    = string
-  default = "http://afddde2aa9a2349f19ea88a81368d68a-1980996683.us-east-1.elb.amazonaws.com"
+  default = "http://a73acb1e7965d4e1286288f0a3621d2b-457653939.us-east-1.elb.amazonaws.com"
 }
 
 variable "payment_uri_lb" {
   type    = string
-  default = "http://adbabe667ae49490aace41d0d30d8d2a-58880327.us-east-1.elb.amazonaws.com"
+  default = "http://a89b05e80043745a89e878e92ab186a5-1759719953.us-east-1.elb.amazonaws.com"
 }
 
 variable "production_uri_lb" {
   type    = string
-  default = "http://aba78a0d3d18f421a9719ce666d00116-1778465615.us-east-1.elb.amazonaws.com"
+  default = "http://a16d3f766dcc547f7b60dd6987a776e7-1733068445.us-east-1.elb.amazonaws.com"
 }
