@@ -3,7 +3,7 @@ resource "aws_mq_broker" "rabbitmq" {
   deployment_mode               = "SINGLE_INSTANCE"
   engine_type                   = "RabbitMQ"
   engine_version                = "3.12.13"
-  host_instance_type            = "mq.t3.micro"
+  host_instance_type            = "mq.m5.large"
   auto_minor_version_upgrade    = false
   apply_immediately             = false
   security_groups               = [aws_security_group.mq_sg.id]
