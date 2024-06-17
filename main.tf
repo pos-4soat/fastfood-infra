@@ -27,6 +27,13 @@ module "ecr" {
   source = "./ecr"
 }
 
+module "rabbitMq" {
+  source = "./rabbitMq"
+
+  vpc_id                    = module.cluster_rds.vpc_id
+  private_subnets_ids       = module.cluster_rds.private_subnets_ids
+}
+
 module "dynamo" {
   source = "./dynamo"
 }
