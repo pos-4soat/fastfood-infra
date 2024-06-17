@@ -3,7 +3,6 @@ resource "aws_mq_broker" "rabbitmq" {
   engine_type        = "RabbitMQ"
   engine_version     = "3.12.13"
   host_instance_type = "mq.t3.micro"
-  publicly_accessible = true
   security_groups    = [aws_security_group.mq_sg.id]
   subnet_ids         = var.private_subnets_ids
   user {
