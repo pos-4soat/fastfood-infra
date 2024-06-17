@@ -35,17 +35,14 @@ module "rabbitMq" {
 }
 
 module "dynamo" {
-  count  = var.create_lambda ? 1 : 0
   source = "./dynamo"
 }
 
 module "cloudwath" {
-  count  = var.create_lambda ? 1 : 0
   source = "./cloudwatch"
 }
 
 module "cognito" {
-  count  = var.create_lambda ? 1 : 0
   source = "./cognito"
 }
 
