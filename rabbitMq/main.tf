@@ -8,7 +8,7 @@ resource "aws_mq_broker" "rabbitmq" {
   subnet_ids         = var.private_subnets_ids
   user {
     username = "rabbitUser"
-    password = "rabbitPwd"
+    password = "rabbitPassword"
   }
 }
 
