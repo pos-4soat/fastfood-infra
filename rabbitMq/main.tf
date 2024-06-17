@@ -1,6 +1,6 @@
 resource "aws_mq_broker" "rabbitmq" {
   broker_name                   = "my-rabbitmq-broker"
-  deployment_mode               = "CLUSTER_MULTI_AZ"
+  deployment_mode               = "SINGLE_INSTANCE"
   engine_type                   = "RabbitMQ"
   engine_version                = "3.12.13"
   host_instance_type            = "mq.t3.micro"
