@@ -12,7 +12,7 @@ module "vpc" {
   name = "eks-vpc"
 
   cidr = "10.0.0.0/16"
-  azs  = slice(data.aws_availability_zones.available.names, 0, 3)
+  azs  = data.aws_availability_zones.available.names
 
   private_subnets = ["10.0.1.0/24"]
   public_subnets  = ["10.0.4.0/24"]
