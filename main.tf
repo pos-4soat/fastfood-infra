@@ -27,15 +27,25 @@ module "ecr" {
   source = "./ecr"
 }
 
+module "rabbitMq" {
+  source = "./rabbitMq"
+
+  vpc_id                    = module.cluster_rds.vpc_id
+  private_subnets_ids       = module.cluster_rds.private_subnets_ids
+}
+
 module "dynamo" {
+  count  = var.create_lambda ? 1 : 0
   source = "./dynamo"
 }
 
 module "cloudwath" {
+  count  = var.create_lambda ? 1 : 0
   source = "./cloudwatch"
 }
 
 module "cognito" {
+  count  = var.create_lambda ? 1 : 0
   source = "./cognito"
 }
 
