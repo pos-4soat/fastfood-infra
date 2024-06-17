@@ -5,7 +5,7 @@ variable "region" {
 
 variable "create_lambda" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "products_uri_lb" {
