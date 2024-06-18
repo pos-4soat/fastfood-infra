@@ -45,6 +45,13 @@ resource "aws_security_group" "rds_sg" {
   }
 
   ingress {
+    from_port   = 5671
+    to_port     = 5671
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -97,6 +104,17 @@ resource "aws_security_group_rule" "allow_eks_nodes" {
   type              = "ingress"
   from_port         = 80
   to_port           = 100
+  protocol          = "tcp"
+  security_group_id = aws_security_group.rds_sg.id
+  source_security_group_id = each.value
+}
+
+resource "aws_security_group_rule" "allow_eks_to_mq" {
+  for_each = toset(local.flattened_security_groups)
+
+  type              = "ingress"
+  from_port         = 5671
+  to_port           = 5671
   protocol          = "tcp"
   security_group_id = aws_security_group.rds_sg.id
   source_security_group_id = each.value

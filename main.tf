@@ -30,8 +30,8 @@ module "ecr" {
 module "rabbitMq" {
   source = "./rabbitMq"
 
-  vpc_id                    = module.cluster_rds.vpc_id
-  private_subnets_ids       = module.cluster_rds.private_subnets_ids
+  private_subnets_ids     = module.cluster_rds.private_subnets_ids
+  security_group_id       = module.cluster_rds.security_group_id
 }
 
 module "dynamo" {
