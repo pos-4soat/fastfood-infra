@@ -109,12 +109,23 @@ resource "aws_security_group_rule" "allow_eks_nodes" {
   source_security_group_id = each.value
 }
 
-resource "aws_security_group_rule" "allow_eks_to_mq" {
+resource "aws_security_group_rule" "allow_eks_to_mq_5671" {
   for_each = toset(local.flattened_security_groups)
 
   type              = "ingress"
   from_port         = 5671
   to_port           = 5671
+  protocol          = "tcp"
+  security_group_id = aws_security_group.rds_sg.id
+  source_security_group_id = each.value
+}
+
+resource "aws_security_group_rule" "allow_eks_to_mq_5672" {
+  for_each = toset(local.flattened_security_groups)
+
+  type              = "ingress"
+  from_port         = 5672
+  to_port           = 5672
   protocol          = "tcp"
   security_group_id = aws_security_group.rds_sg.id
   source_security_group_id = each.value
