@@ -29,8 +29,9 @@ module "ecr" {
 
 module "rabbitMq" {
   source = "./rabbitMq"
-
+  
   private_subnets_ids     = module.cluster_rds.private_subnets_ids
+  security_group_id       = module.cluster_rds.security_group_id
 }
 
 module "dynamo" {
