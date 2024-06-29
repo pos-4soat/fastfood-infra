@@ -43,6 +43,7 @@ module "cloudwath" {
 }
 
 module "cognito" {
+  count  = var.create_lambda ? 1 : 0
   source = "./cognito"
 }
 
