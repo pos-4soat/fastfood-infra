@@ -28,6 +28,7 @@ module "ecr" {
 }
 
 module "dynamo" {
+  count  = var.create_lambda ? 1 : 0
   source = "./dynamo"
 }
 
@@ -36,6 +37,7 @@ module "cloudwath" {
 }
 
 module "cognito" {
+  count  = var.create_lambda ? 1 : 0
   source = "./cognito"
 }
 
@@ -51,9 +53,9 @@ module "lambda" {
 
   access_key_id               = module.authentication_lambda_access_key[0].access_key_id
   secret_access_key           = module.authentication_lambda_access_key[0].secret_access_key
-  dynamodb_table_name         = module.dynamo.dynamodb_table_name
-  cognito_user_pool_id        = module.cognito.cognito_user_pool_id
-  cognito_user_pool_client_id = module.cognito.cognito_user_pool_client_id
+  dynamodb_table_name         = module.dynamo[0].dynamodb_table_name
+  cognito_user_pool_id        = module.cognito[0].cognito_user_pool_id
+  cognito_user_pool_client_id = module.cognito[0].cognito_user_pool_client_id
   lambda_role                 = module.authentication_lambda_access_key[0].lambda_role
   ecr_auth_repository_url     = module.ecr.ecr_auth_repository_url
 }
@@ -62,8 +64,8 @@ module "api_gateway" {
   count  = var.create_lambda ? 1 : 0
   source = "./api_gateway"
 
-  cognito_user_pool_id        = module.cognito.cognito_user_pool_id
-  cognito_user_pool_client_id = module.cognito.cognito_user_pool_client_id
+  cognito_user_pool_id        = module.cognito[0].cognito_user_pool_id
+  cognito_user_pool_client_id = module.cognito[0].cognito_user_pool_client_id
   lambda_arn                  = module.lambda[0].lambda_arn
   lambda_name                 = module.lambda[0].lambda_name
   private_subnets_ids         = module.cluster_rds.private_subnets_ids
