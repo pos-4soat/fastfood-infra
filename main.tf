@@ -27,13 +27,6 @@ module "ecr" {
   source = "./ecr"
 }
 
-module "rabbitMq" {
-  source = "./rabbitMq"
-  
-  private_subnets_ids     = module.cluster_rds.private_subnets_ids
-  security_group_id       = module.cluster_rds.security_group_id
-}
-
 module "dynamo" {
   source = "./dynamo"
 }
@@ -43,7 +36,6 @@ module "cloudwath" {
 }
 
 module "cognito" {
-  count  = var.create_lambda ? 1 : 0
   source = "./cognito"
 }
 
@@ -80,4 +72,11 @@ module "api_gateway" {
   order_uri_lb                = var.order_uri_lb
   payment_uri_lb              = var.payment_uri_lb
   production_uri_lb           = var.production_uri_lb
+}
+
+module "rabbitMq" {
+  source = "./rabbitMq"
+  
+  private_subnets_ids     = module.cluster_rds.private_subnets_ids
+  security_group_id       = module.cluster_rds.security_group_id
 }
