@@ -33,4 +33,7 @@ Para essa funcionar corretamente é necessário alterar o create_lambda para tru
 
 ATENÇÃO:
 * create_lambda = true
+* production_uri_lb com valor do DNS Name do load balancer de produção
 * products_uri_lb com valor do DNS Name do load balancer de produtos
+* order_uri_lb com valor do DNS Name do load balancer de pedidos
+* payment_uri_lb com valor do DNS Name do load balancer de pagamento
